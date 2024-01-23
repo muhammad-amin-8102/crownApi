@@ -10,6 +10,11 @@ const Site = sequelize.define(
     site_code: DataTypes.STRING,
     site_address: DataTypes.STRING,
     qr: DataTypes.STRING,
+    guard: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      defaultValue: 1,
+    },
     shift: {
       type: DataTypes.JSON,
       defaultValue: ["Day Shift"],

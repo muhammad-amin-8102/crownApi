@@ -10,6 +10,9 @@ const Guard = sequelize.define(
     esic_number: DataTypes.STRING,
     mobile: DataTypes.STRING,
     post: DataTypes.STRING,
+    code: DataTypes.STRING,
+    address: DataTypes.STRING,
+    document: DataTypes.JSON,
     createdAt: {
       type: DataTypes.DATE,
       defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
