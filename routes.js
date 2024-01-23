@@ -18,6 +18,8 @@ const emergencyRoutes = require("./routes/emergencyRoutes");
 const complianceRoutes = require("./routes/complianceRoutes");
 const puchedRoute = require("./routes/puchedRoute");
 const pfc = require("./routes/paymentFollowupContactRoutes");
+const ledger = require("./routes/ledgerRoutes");
+const recorn = require("./routes/recornRoutes");
 
 app.use(express.json());
 app.use("/uploads", express.static(__dirname + "/uploads"));
@@ -42,6 +44,8 @@ app.use("/", emergencyRoutes);
 app.use("/", complianceRoutes);
 app.use("/", puchedRoute);
 app.use("/", pfc);
+app.use("/", ledger);
+app.use("/", recorn);
 
 //Handle Wrong URL
 app.use((req, res) => {
