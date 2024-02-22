@@ -8,6 +8,7 @@ const createGuard = async (req, res) => {
       .status(201)
       .json({ status: true, message: "Guard Added Successfully!", guard });
   } catch (error) {
+    console.log(error);
     res.status(400).json({ status: false, message: "Error creating guard" });
   }
 };
