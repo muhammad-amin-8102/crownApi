@@ -12,6 +12,9 @@ const Guard = sequelize.define(
     post: DataTypes.STRING,
     code: DataTypes.STRING,
     address: DataTypes.STRING,
+    accountName: DataTypes.STRING,
+    ifscCode: DataTypes.STRING,
+    accountNumber: DataTypes.STRING,
     document: DataTypes.JSON,
     createdAt: {
       type: DataTypes.DATE,
