@@ -17,6 +17,10 @@ const Complaint = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    designation: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
     subject: {
       type: DataTypes.STRING,
       allowNull: false,
