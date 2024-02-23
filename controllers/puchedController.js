@@ -16,6 +16,22 @@ const createPunched = async (req, res) => {
   }
 };
 
+const getPushedAttbyFO = async (req, res) => {
+  try {
+    const punchedRecords = await Punched.findAll({
+      where: {
+        updateBy: req.params.fo,
+      },
+    });
+    res.json({ status: true, message: "Success", punchedRecords });
+  } catch (error) {
+    console.log(error);
+    res
+      .status(500)
+      .json({ status: false, message: "Error getting punched records" });
+  }
+};
+
 const getAllPunched = async (req, res) => {
   try {
     const punchedRecords = await Punched.findAll();
@@ -31,4 +47,5 @@ const getAllPunched = async (req, res) => {
 module.exports = {
   createPunched,
   getAllPunched,
+  getPushedAttbyFO,
 };

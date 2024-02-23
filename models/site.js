@@ -9,8 +9,24 @@ const Site = sequelize.define(
     site_name: DataTypes.STRING,
     site_code: DataTypes.STRING,
     site_address: DataTypes.STRING,
+    billingAddress: DataTypes.STRING,
+    contactPerson: DataTypes.STRING,
+    contactNumber: DataTypes.STRING,
+    desgnation: DataTypes.STRING,
+    contractStart: DataTypes.STRING,
+    contactEnd: DataTypes.STRING,
     qr: DataTypes.STRING,
     guard: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      defaultValue: 1,
+    },
+    dayShirtGuard: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      defaultValue: 1,
+    },
+    nightShiftGuard: {
       type: DataTypes.INTEGER,
       allowNull: false,
       defaultValue: 1,
@@ -18,6 +34,10 @@ const Site = sequelize.define(
     shift: {
       type: DataTypes.JSON,
       defaultValue: ["Day Shift"],
+    },
+    pattern: {
+      type: DataTypes.JSON,
+      defaultValue: ["8 hours, 12 hours"],
     },
     createdAt: {
       type: DataTypes.DATE,
