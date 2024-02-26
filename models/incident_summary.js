@@ -31,7 +31,7 @@ const IncidentSummary = sequelize.define(
       allowNull: false,
     },
     media: {
-      type: DataTypes.STRING,
+      type: DataTypes.JSON,
     },
   },
   {

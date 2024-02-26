@@ -25,8 +25,12 @@ const Request = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    guard_id: {
-      type: DataTypes.INTEGER,
+    guard: {
+      type: DataTypes.JSON,
+      allowNull: false,
+    },
+    fo: {
+      type: DataTypes.JSON,
       allowNull: false,
     },
   },

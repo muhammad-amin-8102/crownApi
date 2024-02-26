@@ -13,8 +13,8 @@ const Penalty = sequelize.define(
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    image: {
-      type: DataTypes.STRING,
+    images: {
+      type: DataTypes.JSON,
       allowNull: false,
     },
     reason: {
