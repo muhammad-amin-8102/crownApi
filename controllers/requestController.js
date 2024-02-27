@@ -1,8 +1,6 @@
 const Request = require("../models/request");
 const Guard = require("../models/guard");
 
-Request.belongsTo(Guard, { foreignKey: "guard", as: "guard" });
-
 // Create a new request record
 const createRequest = async (req, res) => {
   try {
@@ -18,9 +16,7 @@ const createRequest = async (req, res) => {
 // Get all request records
 const getAllRequests = async (req, res) => {
   try {
-    const requests = await Request.findAll({
-      include: [{ model: Guard, as: "guard" }],
-    });
+    const requests = await Request.findAll();
 
     const result = requests.map((request) => {
       request.accessories = JSON.parse(request.accessories);
