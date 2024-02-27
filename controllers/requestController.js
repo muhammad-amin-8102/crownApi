@@ -1,7 +1,7 @@
 const Request = require("../models/request");
 const Guard = require("../models/guard");
 
-Request.belongsTo(Guard, { foreignKey: "guard_id", as: "guard" });
+Request.belongsTo(Guard, { foreignKey: "guard", as: "guard" });
 
 // Create a new request record
 const createRequest = async (req, res) => {
