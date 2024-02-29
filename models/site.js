@@ -12,7 +12,7 @@ const Site = sequelize.define(
     billingAddress: DataTypes.STRING,
     contactPerson: DataTypes.STRING,
     contactNumber: DataTypes.STRING,
-    desgnation: DataTypes.STRING,
+    designation: DataTypes.STRING,
     contractStart: DataTypes.STRING,
     contactEnd: DataTypes.STRING,
     qr: DataTypes.STRING,
@@ -33,7 +33,7 @@ const Site = sequelize.define(
     },
     shift: {
       type: DataTypes.JSON,
-      defaultValue: ["Day Shift"],
+      defaultValue: ["1st Shift", "2nd Shift", "3rd Shift"],
     },
     pattern: {
       type: DataTypes.JSON,

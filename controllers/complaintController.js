@@ -26,13 +26,7 @@ const getAllComplaints = async (req, res) => {
       const guard = await Guard.findByPk(complaint.guard_id);
       complaint["guard"] = guard;
       const complaintData = {
-        id: complaint.id,
-        name: complaint.name,
-        subject: complaint.subject,
-        message: complaint.message,
-        guard_id: complaint.guard_id,
-        replied: complaint.replied,
-        createdAt: complaint.createdAt,
+        ...complaint.toJSON(),
         guard: guard
           ? {
               id: guard.id,

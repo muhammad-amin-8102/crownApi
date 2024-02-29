@@ -12,6 +12,7 @@ const createPenalty = async (req, res) => {
       .status(201)
       .json({ status: true, message: "Penalty Added Successfully!", penalty });
   } catch (error) {
+    console.log(error);
     res.status(400).json({ status: false, message: "Error creating penalty" });
   }
 };

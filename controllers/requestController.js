@@ -17,12 +17,7 @@ const createRequest = async (req, res) => {
 const getAllRequests = async (req, res) => {
   try {
     const requests = await Request.findAll();
-
-    const result = requests.map((request) => {
-      request.accessories = JSON.parse(request.accessories);
-      return request;
-    });
-    res.json({ status: true, message: "Success", requests: result });
+    res.json({ status: true, message: "Success", requests });
   } catch (error) {
     res.status(500).json({ status: false, message: "Error getting requests" });
   }

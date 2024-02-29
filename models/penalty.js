@@ -15,9 +15,14 @@ const Penalty = sequelize.define(
     },
     images: {
       type: DataTypes.JSON,
-      allowNull: false,
     },
     reason: {
+      type: DataTypes.STRING,
+    },
+    siteName: {
+      type: DataTypes.STRING,
+    },
+    date: {
       type: DataTypes.STRING,
     },
     createdAt: {

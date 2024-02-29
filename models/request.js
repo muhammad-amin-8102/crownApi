@@ -27,11 +27,9 @@ const Request = sequelize.define(
     },
     guard: {
       type: DataTypes.JSON,
-      allowNull: false,
     },
     fo: {
       type: DataTypes.JSON,
-      allowNull: false,
     },
   },
   {
