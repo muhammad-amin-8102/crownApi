@@ -22,6 +22,7 @@ const ledger = require("./routes/ledgerRoutes");
 const recorn = require("./routes/recornRoutes");
 const notification = require("./routes/notification");
 const slip = require("./routes/salarySlip");
+const clientPenalty = require("./routes/clientSitePenalty");
 
 app.use(express.json());
 app.use("/uploads", express.static(__dirname + "/uploads"));
@@ -50,6 +51,7 @@ app.use("/", ledger);
 app.use("/", recorn);
 app.use("/", notification);
 app.use("/", slip);
+app.use("/", clientPenalty);
 
 //Handle Wrong URL
 app.use((req, res) => {
