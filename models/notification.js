@@ -11,6 +11,9 @@ const Notification = sequelize.define("notifications", {
   body: {
     type: DataTypes.STRING,
   },
+  toId: {
+    type: DataTypes.INTEGER,
+  },
 });
 
 module.exports = Notification;
