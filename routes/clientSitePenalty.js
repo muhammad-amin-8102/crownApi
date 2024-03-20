@@ -2,9 +2,9 @@ const express = require("express");
 const router = express.Router();
 const ClientPenalty = require("../models/clientSitePenalty");
 
-router.post("/clientPenalties", (req, res) => {
+router.post("/clientPenalties", async (req, res) => {
   try {
-    ClientPenalty.create({
+    await ClientPenalty.create({
       siteName: req.body.siteName,
       details: req.body.details,
     });
@@ -17,18 +17,12 @@ router.post("/clientPenalties", (req, res) => {
   }
 });
 
-router.get("/clientPenalties", (req, res) => {
+router.get("/clientPenalties", async (req, res) => {
   try {
     const site = req.query.siteName;
-    const clientPenalty = ClientPenalty.findAll({ where: { siteName: site } });
-    const finalItems = [];
-
-    for (const item of clientPenalty) {
-      finalItems.push({
-        siteName: item.siteName,
-        details: JSON.parse(item.details),
-      });
-    }
+    const clientPenalty = await ClientPenalty.findAll({
+      where: { siteName: site },
+    });
 
     res.json({ status: true, message: "Success", clientPenalty });
   } catch (e) {
