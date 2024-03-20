@@ -49,6 +49,10 @@ router.post("/sendNotification", async (req, res) => {
     }
 
     await Notification.create({ modelType: type, title, body });
+
+    res
+      .status(200)
+      .json({ status: true, message: "Notifications sent successfully" });
   } catch (e) {
     console.log(e);
     res
