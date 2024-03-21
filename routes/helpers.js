@@ -61,9 +61,9 @@ router.post("/sendNotification", async (req, res) => {
   }
 });
 
-router.get("/getNotification", async (req, res) => {
+router.post("/notification", async (req, res) => {
   try {
-    const notifications = await Notification.findAll();
+    const notifications = await Notification.create(req.body);
     res.json({ status: true, message: "Success", notifications });
   } catch (error) {
     console.log(error);
