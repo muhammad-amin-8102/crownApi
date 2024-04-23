@@ -1,4 +1,5 @@
 const Attendance = require("../models/attendance");
+const NightQR = require("../models/nightQr");
 
 // Create a new attendance record
 const addAttendance = async (req, res) => {
@@ -18,7 +19,16 @@ const addAttendance = async (req, res) => {
 const getAllAttendance = async (req, res) => {
   try {
     const attendances = await Attendance.findAll();
-    res.json({ status: true, message: "Success", attendances });
+
+    const finalList = [];
+    for (const attendance of attendances) {
+      const nightQr = await NightQR.findAll({
+        where: { attId: attendance.id },
+      });
+      finalList.push({ ...attendance.toJSON(), nightQr });
+    }
+
+    res.json({ status: true, message: "Success", attendances: finalList });
   } catch (error) {
     console.log(error);
     res
