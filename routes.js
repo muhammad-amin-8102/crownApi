@@ -25,6 +25,7 @@ const slip = require("./routes/salarySlip");
 const clientPenalty = require("./routes/clientSitePenalty");
 const referGuard = require("./routes/referGuardController");
 const nightQR = require("./routes/nightQr");
+const rateCart = require("./routes/rateCart");
 
 app.use(express.json());
 app.use("/uploads", express.static(__dirname + "/uploads"));
@@ -57,6 +58,7 @@ app.use("/", slip);
 app.use("/", clientPenalty);
 app.use("/", referGuard);
 app.use("/", nightQR);
+app.use("/", rateCart);
 
 //Handle Wrong URL
 app.use((req, res) => {
