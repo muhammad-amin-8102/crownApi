@@ -8,9 +8,6 @@ const RateCart = sequelize.define("rateCart", {
   },
   prices: {
     type: DataTypes.JSON,
-    get() {
-      return JSON.parse(this.getDataValue("prices"));
-    },
   },
 });
 

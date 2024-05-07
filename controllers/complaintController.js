@@ -1,5 +1,6 @@
 const Complaint = require("../models/complaint");
 const Guard = require("../models/guard");
+const { createNotification } = require("./notification");
 
 const createComplaint = async (req, res) => {
   try {
@@ -63,6 +64,12 @@ const updateComplaintReplied = async (req, res) => {
       return;
     }
     await complaint.update({ replied });
+    await createNotification(
+      "client",
+      "Reply of your Complaint",
+      replied,
+      complaint.guard_id
+    );
     res.json({
       status: true,
       message: "Complaint replied status updated successfully",
