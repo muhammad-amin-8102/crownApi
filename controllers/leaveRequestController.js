@@ -1,4 +1,5 @@
 const LeaveRequest = require("../models/leaveRequest");
+const Guard = require("../models/guard");
 const { createNotification } = require("./notification");
 
 const addLeaveRequest = async (req, res) => {
@@ -19,8 +20,17 @@ const addLeaveRequest = async (req, res) => {
 const getAllLeaveRequests = async (req, res) => {
   try {
     const leaveRequests = await LeaveRequest.findAll();
-    res.json({ status: true, message: "Success", leaveRequests });
+    const finalList = [];
+    for (const leaveRequest of leaveRequests) {
+      const guard = await Guard.findByPk(leaveRequest.guard);
+      finalList.push({
+        ...leaveRequest.toJSON(),
+        guardDetails: guard.toJSON(),
+      });
+    }
+    res.json({ status: true, message: "Success", leaveRequests: finalList });
   } catch (error) {
+    console.log(error);
     res
       .status(500)
       .json({ status: false, message: "Error getting leave requests" });
@@ -56,7 +66,12 @@ const updateLeaveRequestStatus = async (req, res) => {
     }
 
     await leaveRequest.update({ status });
-    createNotification("Leave request", `Your leave request is ${status}.`);
+    createNotification(
+      ["modelType"],
+      "Leave request",
+      `Your leave request is ${status}.`,
+      leaveRequest.guard
+    );
     res.json({
       status: true,
       message: "Leave request status updated successfully",

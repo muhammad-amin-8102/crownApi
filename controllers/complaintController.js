@@ -65,7 +65,7 @@ const updateComplaintReplied = async (req, res) => {
     }
     await complaint.update({ replied });
     await createNotification(
-      "client",
+      ["client"],
       "Reply of your Complaint",
       replied,
       complaint.guard_id
