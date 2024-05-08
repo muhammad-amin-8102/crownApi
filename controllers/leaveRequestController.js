@@ -1,4 +1,5 @@
 const LeaveRequest = require("../models/leaveRequest");
+const { createNotification } = require("./notification");
 
 const addLeaveRequest = async (req, res) => {
   try {
@@ -55,6 +56,7 @@ const updateLeaveRequestStatus = async (req, res) => {
     }
 
     await leaveRequest.update({ status });
+    createNotification("Leave request", `Your leave request is ${status}.`);
     res.json({
       status: true,
       message: "Leave request status updated successfully",
