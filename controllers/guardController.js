@@ -3,6 +3,14 @@ const Guard = require("../models/guard");
 // Create a new guard
 const createGuard = async (req, res) => {
   try {
+    const mobile = req.body.phone;
+    const isExists = await Guard.findOne({ where: { mobile } });
+    if (isExists) {
+      res
+        .status(400)
+        .json({ status: false, message: "Phone number already exists" });
+      return;
+    }
     const guard = await Guard.create(req.body);
     res
       .status(201)
