@@ -1,6 +1,5 @@
 const LeaveRequest = require("../models/leaveRequest");
 
-// Create a new leave request record
 const addLeaveRequest = async (req, res) => {
   try {
     const leaveRequest = await LeaveRequest.create(req.body);
@@ -16,7 +15,6 @@ const addLeaveRequest = async (req, res) => {
   }
 };
 
-// Get all leave request records
 const getAllLeaveRequests = async (req, res) => {
   try {
     const leaveRequests = await LeaveRequest.findAll();
@@ -28,7 +26,6 @@ const getAllLeaveRequests = async (req, res) => {
   }
 };
 
-// Get leave request records by guard
 const getLeaveRequestsByGuard = async (req, res) => {
   const { guard } = req.params;
   try {
@@ -44,8 +41,35 @@ const getLeaveRequestsByGuard = async (req, res) => {
   }
 };
 
+const updateLeaveRequestStatus = async (req, res) => {
+  const { id } = req.params;
+  const { status } = req.body;
+
+  try {
+    const leaveRequest = await LeaveRequest.findByPk(id);
+
+    if (!leaveRequest) {
+      return res
+        .status(404)
+        .json({ status: false, message: "Leave request not found" });
+    }
+
+    await leaveRequest.update({ status });
+    res.json({
+      status: true,
+      message: "Leave request status updated successfully",
+    });
+  } catch (error) {
+    console.error("Error updating leave request status:", error);
+    res
+      .status(500)
+      .json({ status: false, message: "Error updating leave request status" });
+  }
+};
+
 module.exports = {
   addLeaveRequest,
   getAllLeaveRequests,
   getLeaveRequestsByGuard,
+  updateLeaveRequestStatus,
 };

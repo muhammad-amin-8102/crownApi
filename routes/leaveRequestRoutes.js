@@ -8,5 +8,9 @@ router.get(
   "/leaveRequests/guard/:guard",
   leaveRequestController.getLeaveRequestsByGuard
 );
+router.put(
+  "/leaveRequests/:id",
+  leaveRequestController.updateLeaveRequestStatus
+);
 
 module.exports = router;
