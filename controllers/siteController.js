@@ -4,10 +4,10 @@ const { generateBarCode } = require("../utils/helper");
 // Create a new site
 const createSite = async (req, res) => {
   try {
-    const qrCode = await generateBarCode();
-    const body = req.body;
-    body.qr = qrCode;
     const site = await Site.create(req.body);
+    const qrCode = await generateBarCode(site.id, "");
+    site.qr = qrCode;
+    await site.save();
     res
       .status(201)
       .json({ status: true, message: "Site Added Successfully!", site });
