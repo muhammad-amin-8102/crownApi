@@ -67,7 +67,7 @@ const updateLeaveRequestStatus = async (req, res) => {
 
     await leaveRequest.update({ status });
     createNotification(
-      ["modelType"],
+      ["guard"],
       "Leave request",
       `Your leave request is ${status}.`,
       leaveRequest.guard
