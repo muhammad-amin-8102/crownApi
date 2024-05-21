@@ -2,6 +2,12 @@ const Recorn = require("../models/recorn");
 
 const createRecornEntry = async (req, res) => {
   try {
+    await Recorn.destroy({
+      where: {
+        billing_month: req.body.billing_month,
+        site_id: req.body.site_id,
+      },
+    });
     const recornEntry = await Recorn.create(req.body);
     res.status(201).json({
       status: true,

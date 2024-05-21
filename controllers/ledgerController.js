@@ -2,6 +2,13 @@ const Ledger = require("../models/ledger");
 
 const createLedgerEntry = async (req, res) => {
   try {
+    await Ledger.destroy({
+      where: {
+        billing_month: req.body.billing_month,
+        site_id: req.body.site_id,
+      },
+    });
+
     const ledgerEntry = await Ledger.create(req.body);
     res.status(201).json({
       status: true,
