@@ -25,9 +25,10 @@ const createLedgerEntry = async (req, res) => {
 
 const getLedgerEntriesBySiteId = async (req, res) => {
   const { siteId } = req.params;
+  const month = req.query.month;
   try {
     const ledgerEntries = await Ledger.findOne({
-      where: { site_id: siteId },
+      where: { site_id: siteId, billing_month: month },
     });
 
     if (!ledgerEntries) {
