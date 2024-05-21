@@ -24,9 +24,10 @@ const createRecornEntry = async (req, res) => {
 
 const getRecornEntriesBySiteId = async (req, res) => {
   const { siteId } = req.params;
+  const month = req.query.month;
   try {
     const recornEntries = await Recorn.findOne({
-      where: { site_id: siteId },
+      where: { site_id: siteId, billing_month: month },
     });
 
     if (!recornEntries) {
