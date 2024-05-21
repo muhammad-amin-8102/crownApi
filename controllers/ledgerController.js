@@ -1,6 +1,5 @@
 const Ledger = require("../models/ledger");
 
-// Create a new ledger entry
 const createLedgerEntry = async (req, res) => {
   try {
     const ledgerEntry = await Ledger.create(req.body);
@@ -17,13 +16,20 @@ const createLedgerEntry = async (req, res) => {
   }
 };
 
-// Get ledger entries by site id
 const getLedgerEntriesBySiteId = async (req, res) => {
   const { siteId } = req.params;
   try {
-    const ledgerEntries = await Ledger.findAll({
+    const ledgerEntries = await Ledger.findOne({
       where: { site_id: siteId },
     });
+
+    if (!ledgerEntries) {
+      return res.status(404).json({
+        status: false,
+        message: "No ledger entries found for this site",
+      });
+    }
+
     res.json({ status: true, message: "Success", ledgerEntries });
   } catch (error) {
     console.log(error);

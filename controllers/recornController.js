@@ -1,6 +1,5 @@
 const Recorn = require("../models/recorn");
 
-// Create a new ledger entry
 const createRecornEntry = async (req, res) => {
   try {
     const recornEntry = await Recorn.create(req.body);
@@ -17,13 +16,20 @@ const createRecornEntry = async (req, res) => {
   }
 };
 
-// Get ledger entries by site id
 const getRecornEntriesBySiteId = async (req, res) => {
   const { siteId } = req.params;
   try {
-    const recornEntries = await Recorn.findAll({
+    const recornEntries = await Recorn.findOne({
       where: { site_id: siteId },
     });
+
+    if (!recornEntries) {
+      return res.status(404).json({
+        status: false,
+        message: "No ledger entries found for this site",
+      });
+    }
+
     res.json({ status: true, message: "Success", recornEntries });
   } catch (error) {
     console.log(error);
