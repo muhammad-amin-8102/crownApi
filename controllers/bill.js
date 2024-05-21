@@ -206,7 +206,7 @@ const generateBill = async (req, res) => {
           <table class="table" width="100%">
             <tr style="border: 2px solid black">
               <td class="text-center">
-                <img style="width: 70%" src="./images.jpeg" alt="" />
+                <img style="width: 70%" src="https://shellcode.co.in/logo.png" alt="" />
               </td>
               <td>
                 <h1 class="text-center">CROWN SECURITY AGENCIES</h1>
