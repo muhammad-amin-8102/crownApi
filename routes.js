@@ -31,6 +31,7 @@ const bill = require("./routes/bill");
 app.use(express.json());
 app.use("/uploads", express.static(__dirname + "/uploads"));
 app.use("/QRCodes", express.static(__dirname + "/QRCodes"));
+app.use("/invoices", express.static(__dirname + "/invoices"));
 app.use("/", require("./routes/helpers"));
 
 //Routes
