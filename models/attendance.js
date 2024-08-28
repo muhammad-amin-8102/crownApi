@@ -37,6 +37,10 @@ const Attendance = sequelize.define(
       type: DataTypes.STRING,
       allowNull: true,
     },
+    reason: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    }
   },
   {
     tableName: "attendances",

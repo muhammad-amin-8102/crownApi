@@ -79,7 +79,7 @@ const getAttendanceBySiteAndDate = async (req, res) => {
 
 const updateEndTimeById = async (req, res) => {
   const { id } = req.params;
-  const { endTime } = req.body;
+  const { endTime, reason } = req.body;
 
   try {
     const attendance = await Attendance.findByPk(id);
@@ -92,6 +92,7 @@ const updateEndTimeById = async (req, res) => {
 
     // Update endTime
     attendance.endTime = endTime;
+    attendance.reason = reason;
     await attendance.save();
 
     return res.json({
