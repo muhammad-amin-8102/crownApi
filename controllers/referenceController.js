@@ -30,7 +30,23 @@ const getAllReferences = async (req, res) => {
   }
 };
 
+const getAllReferencesByGuard = async (req, res) => {
+  const { guard } = req.params;
+  try {
+    const references = await Reference.findAll({
+      where: { guard },
+    });
+    res.json({ status: true, message: "Success", references });
+  } catch (error) {
+    console.log(error);
+    res
+      .status(500)
+      .json({ status: false, message: "Error getting references" });
+  }
+};
+
 module.exports = {
   createReference,
   getAllReferences,
+  getAllReferencesByGuard
 };
