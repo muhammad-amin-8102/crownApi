@@ -1,5 +1,6 @@
 const Attendance = require("../models/attendance");
 const NightQR = require("../models/nightQr");
+const { Op } = require('sequelize');
 
 // Create a new attendance record
 const addAttendance = async (req, res) => {
@@ -60,6 +61,34 @@ const getAttendanceByGuardAndDate = async (req, res) => {
   }
 };
 
+// Get attendance records by guard and date range
+const getAllAttendanceByGuardAndDateRange = async (req, res) => {
+  const { guard, startDate, endDate } = req.params;
+  try {
+    const attendances = await Attendance.findAll({
+      where: { guard, date: {
+        [Op.gte]: startDate,  // Greater than or equal to the start date
+        [Op.lte]: endDate     // Less than or equal to the end date
+      }}
+    });
+
+    const finalList = [];
+    for (const attendance of attendances) {
+      const nightQr = await NightQR.findAll({
+        where: { attId: attendance.id },
+      });
+      finalList.push({ ...attendance.toJSON(), nightQr });
+    }
+
+    res.json({ status: true, message: "Success", attendances: finalList });
+  } catch (error) {
+    console.log(error);
+    res
+      .status(500)
+      .json({ status: false, message: "Error getting attendance records" });
+  }
+};
+
 // Get attendance records by site and date
 const getAttendanceBySiteAndDate = async (req, res) => {
   const { site, date } = req.params;
@@ -113,4 +142,5 @@ module.exports = {
   getAttendanceByGuardAndDate,
   getAttendanceBySiteAndDate,
   updateEndTimeById,
+  getAllAttendanceByGuardAndDateRange
 };

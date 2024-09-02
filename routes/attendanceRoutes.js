@@ -4,6 +4,7 @@ const attendanceController = require("../controllers/attendanceController");
 
 router.post("/attendance", attendanceController.addAttendance);
 router.get("/attendance", attendanceController.getAllAttendance);
+router.get("/attendance/guard-with-range/:guard/:startDate/:endDate", attendanceController.getAllAttendanceByGuardAndDateRange);
 router.get(
   "/attendance/guard/:guard/date/:date",
   attendanceController.getAttendanceByGuardAndDate
